@@ -164,9 +164,9 @@ class Graph:
         visited = {starting_vertex}
         route = []
 
-        #  define search function
+        # define search function
         def search(starting_vertex, destination_vertex):
-            # base case, if current is what we're looking for, add it to the route and finish
+            # base case, if current is what we're looking for, add it to the route and start building route instead of visited
             if starting_vertex == destination_vertex:
                 route.insert(0, starting_vertex)
                 return True
@@ -174,6 +174,9 @@ class Graph:
             for v in self.get_neighbors(starting_vertex):
                 if v not in visited:
                     visited.add(v)
+                    # this recursively shortens route to the shortest path
+                    # by checking for an edge between the current vertex and the 
+                    # destination
                     if search(v, destination_vertex):
                         route.insert(0, starting_vertex)
                         return True
